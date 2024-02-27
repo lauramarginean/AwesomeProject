@@ -11,7 +11,7 @@ function CategoryGrid({ title, color,onPress }: any) {
             onPress={onPress}
         >
             <View style={[styles.innerContainer, { backgroundColor: color }]}>
-                <Text>
+                <Text >
                     {title}
                 </Text>
             </View>

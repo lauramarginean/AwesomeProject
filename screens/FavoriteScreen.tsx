@@ -20,7 +20,7 @@ function FavoriteScreen() {
     }
 
     return (
-        <View>
+        <View style={styles.appContainer}>
             <FlatList
                 data={favoriteProducts}
                 keyExtractor={(item) => item.id}
@@ -34,6 +34,7 @@ export default FavoriteScreen;
 
 const styles = StyleSheet.create({
     appContainer: {
-        padding: 50,
+        padding: 5,
+        backgroundColor: "#7393B3",
     }
 });

@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { PRODUCTS, Product } from "../data/data";
 import { useRoute } from "@react-navigation/native";
 import ProductItem from "../components/ProductItem";
@@ -20,7 +20,7 @@ function ProductsOverviewScreen() {
     }
 
     return (
-        <View>
+        <View style={styles.sectionContainer}>
             <FlatList
                 data={displayedProducts}
                 keyExtractor={(item) => item.id}
@@ -31,3 +31,13 @@ function ProductsOverviewScreen() {
 }
 
 export default ProductsOverviewScreen;
+
+const styles = StyleSheet.create({
+
+    sectionContainer: {
+        padding: 5,
+        backgroundColor: "#7393B3",
+    },
+   
+
+});

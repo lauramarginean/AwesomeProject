@@ -14,6 +14,7 @@ import FavoritesContextProvider from './store/context/favorite-context';
 import LoginScreen from './screens/LoginScreen';
 import Icon from 'react-native-ionicons';
 import ProfileScreen from './screens/ProfileScreen';
+import HomeScreen from './screens/HomeScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -22,6 +23,7 @@ const Tab = createBottomTabNavigator();
 function TabNavigation() {
   return (
     <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Categories" component={CategoriesScreen} />
       <Tab.Screen name="Favorites" component={FavoriteScreen} />
      

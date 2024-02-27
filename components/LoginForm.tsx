@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     title: {
         fontWeight: "bold",
         fontSize: 50,
-        color: "#3AB4BA",
+        color: "#7393B3",
         marginBottom: 40,
     },
     forgot: {
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
 
     inputView: {
         width: "90%",
-        backgroundColor: "#3AB4BA",
+        backgroundColor: "#7393B3",
         borderRadius: 10,
         height: 50,
         marginBottom: 20,
