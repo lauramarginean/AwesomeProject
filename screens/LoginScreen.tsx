@@ -1,12 +1,8 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import LoginForm from "../components/LoginForm";
+import React from 'react';
+import LoginForm from '../components/LoginForm';
 
 function LoginScreen() {
-
-
-    return <View >
-        <LoginForm/>
-    </View>
+  return <LoginForm />;
 }
 
-export default LoginScreen
+export default LoginScreen;
