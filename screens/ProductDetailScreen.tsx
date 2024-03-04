@@ -1,65 +1,68 @@
-import { useRoute } from "@react-navigation/native";
-import { Button, Image, StyleSheet, Text, View } from "react-native"
-import { useContext, useEffect } from "react";
-import { FavoritesContext } from "../store/context/favorite-context";
-import React from "react";
-import { PRODUCTS } from "../data/data";
+import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { useCallback, useContext, useEffect } from 'react';
+import { FavoritesContext } from '../store/context/favorite-context';
+import React from 'react';
+import { PRODUCTS } from '../data/data';
+import { RootStackParamList } from '../App';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-function ProductDetailScreen({ navigation }: any) {
-    const favoriteProductContext = useContext(FavoritesContext);
-    const route = useRoute();
-    const { productId } = route.params
+export type ProductDetailScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  'ProductDetail'
+>;
 
-    const selectedPreoduct = PRODUCTS.find((product)=>product.id === productId)
+function ProductDetailScreen({ route, navigation }: ProductDetailScreenProps) {
+  const favoriteProductContext = useContext(FavoritesContext);
+  const { productId } = route.params;
 
-    const isProductFavorite = favoriteProductContext.ids.includes(productId)
+  const selectedProduct = PRODUCTS.find(product => product.id === productId);
 
-    function headerButtonPressed() {
-        if (isProductFavorite) {
-            favoriteProductContext.removeFavorite(productId)
-        } else {
-            favoriteProductContext.addFavorite(productId)
-        }
+  const isProductFavorite = favoriteProductContext.ids.includes(productId);
+
+  const headerButtonPressed = useCallback(() => {
+    if (isProductFavorite) {
+      favoriteProductContext.removeFavorite(productId);
+    } else {
+      favoriteProductContext.addFavorite(productId);
     }
+  }, [favoriteProductContext, isProductFavorite, productId]);
 
-    React.useEffect(() => {
-        navigation.setOptions({
-            headerRight: () => {
-                return (
-                    <Button
-                        title={isProductFavorite ? "unfavorite" : "favorite"}
-                        onPress={
-                            headerButtonPressed
-                        } />
-                )
-            }
-        })
+  useEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/no-unstable-nested-components
+      headerRight: () => {
+        return (
+          <Button
+            title={isProductFavorite ? 'unfavorite' : 'favorite'}
+            onPress={headerButtonPressed}
+          />
+        );
+      },
+    });
+  }, [headerButtonPressed, isProductFavorite, navigation]);
 
-    }, [headerButtonPressed]);
-
-    return <View style={styles.item}>
-        <Image source={{ uri: selectedPreoduct?.imageUrl }} style={styles.image} />
-        <View >
-            <Text>{selectedPreoduct?.title} </Text>
-            <Text>Price: {selectedPreoduct?.price} </Text>
-            <Text>Rating: {selectedPreoduct?.rating} </Text>
-            <Text>Desctiption: {selectedPreoduct?.description} </Text>
-        </View>
-
+  return (
+    <View style={styles.item}>
+      <Image source={{ uri: selectedProduct?.imageUrl }} style={styles.image} />
+      <View>
+        <Text>{selectedProduct?.title} </Text>
+        <Text>Price: {selectedProduct?.price} </Text>
+        <Text>Rating: {selectedProduct?.rating} </Text>
+        <Text>Description: {selectedProduct?.description} </Text>
+      </View>
     </View>
+  );
 }
 
 export default ProductDetailScreen;
 
 const styles = StyleSheet.create({
-    item:{
-        margin:16,
-    },
-    
-    image: {
-        width: '100%',
-        height: 300,
-     
-    },
+  item: {
+    margin: 16,
+  },
 
+  image: {
+    width: '100%',
+    height: 300,
+  },
 });
